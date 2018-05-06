@@ -1,5 +1,5 @@
-using Base.Test
 using VariableTypes
+using Base.Test
 
 @testset "Single value dispatch" begin
     @test vartype(1) === Discrete

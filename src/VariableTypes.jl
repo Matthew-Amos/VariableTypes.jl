@@ -9,4 +9,4 @@ export  vartype,
 
 include("vartypes.jl")
 
-end
+end # module
