@@ -23,15 +23,15 @@ end
 # Variable type for a vector
 # will check the lesser of the vector length or `searchlen`
 function vartype(v::T where T <: AbstractVector, searchlen = 100)
-    buffer = v[1:min(length(v), searchlen)]
+    subarr = v[1:min(length(v), searchlen)]
 
     # Assess
-    if any(is_categorical.(buffer))
+    if any(is_categorical.(subarr))
         return Categorical
     else
-        if any(is_continuous.(buffer))
+        if any(is_continuous.(subarr))
             return Continuous
-        elseif any(is_discrete.(buffer))
+        elseif any(is_discrete.(subarr))
             return Discrete
         else
             return Quantitative
