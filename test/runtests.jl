@@ -23,6 +23,6 @@ end
     a[:, 2] = repeat([1, 2], inner=5)
     a[:, 3] = repeat(["A", "B"], inner=5)
 
-    @test vartype(a, 1, 10) === [Continuous, Discrete, Categorical]
-    @test vartype(a, 2) === repeat([Categorical], inner=10)
+    @test all(vartype(a, 1, 10) .=== [Continuous, Discrete, Categorical])
+    @test all(vartype(a, 2) .=== repeat([Categorical], inner=10))
 end

@@ -1,8 +1,8 @@
 abstract type VariableType end
-abstract type Categorical <: VariableType end
 abstract type Quantitative <: VariableType end
-abstract type Continuous <: Quantitative end
-abstract type Discrete <: Quantitative end
+struct Categorical <: VariableType end
+struct Continuous <: Quantitative end
+struct Discrete <: Quantitative end
 
 # Variable type of a single value
 function vartype(v)
@@ -14,16 +14,18 @@ function vartype(v)
         else
             return Quantitative
         end
-    else
+    elseif is_categorical(v)
         # Not currently making a distinction between nominal/dichotomous or ordinal
         return Categorical
+    else
+        error("Could not classify variable")
     end
 end
 
 # Variable type for a vector
 # will check the lesser of the vector length or `searchlen`
 function vartype(v::T where T <: AbstractVector, searchlen = 100)
-    subarr = v[1:min(length(v), searchlen)]
+    subarr = view(v, 1:min(length(v), searchlen))
 
     # Assess
     if any(is_categorical.(subarr))

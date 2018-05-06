@@ -1,6 +1,6 @@
 # VariableTypes.jl
 
-Detects basic statistical variable types of data:
+Detects the basic statistical variable types:
 
 * **Quantitative** - Measurable variables.
   * **Continuous** - Can take on any value in a continuum.
@@ -9,7 +9,9 @@ Detects basic statistical variable types of data:
 
 # Methodology
 
-The available types in this package are those that do not inherently require domain knowledge or opinion of the dataset. For this reason `Categorical` has not been further subdivided into *Nominal* or *Ordinal*. For instance, a variable containing values *A, B, C, D* could be considered either *Nominal* if the letters denote a group or *Ordinal* if they are academic grades.
+The available types in this package are those that do not inherently require domain knowledge or opinion of the dataset. For this reason `Categorical` has not been further subdivided into *Nominal* or *Ordinal*.
+
+> For instance, a variable containing values *A, B, C, D* could be considered either *Nominal* if the letters denote a group or *Ordinal* if they are academic grades.
 
 Instead, this package relies on Julia's type system to determine statistical types. Simply put, quantitative variables inherit from `Number` while categorical variables are presumed to inherit from non-number types.
 
@@ -18,6 +20,11 @@ Ambiguities related to numbers being treated categorically (e.g. discrete intege
 # Useage
 
 #### Single Values
+
+```julia
+vartype(v)
+```
+Simply pass a value to the `vartype` function.
 
 ```julia
 # Single values
